@@ -1,12 +1,12 @@
 const { render } = require("ejs");
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
 const authRoutes = require("./routes/authRoutes");
 
+const app = express();
 // middlewares
 app.use(express.static("public"));
-
+app.use(express.json());
 // view engine
 app.set("view engine", "ejs");
 
@@ -22,7 +22,16 @@ mongoose
   .catch((err) => console.log(err));
 
 //Routes
+app.get("/index", (req, res) => {
+  res.render("index", { title: "index", page: "home" });
+});
+
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { title: "home" });
 });
 app.use(authRoutes);
+
+// app.get("/login", (req, res) => {
+//   //res.redirect("/about");
+//   res.render("login", { title: "Login" });
+// });

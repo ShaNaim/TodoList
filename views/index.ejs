@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <%- include('layouts/header') %>
-    <link rel="stylesheet" href="custom_components/css/todoList.css" />
   </head>
   <body class="bg-secondary">
     <div class="container">
       <%- include('layouts/nav') %>
       <div class="body bg-dark p-5 mt-2">
-        <%- include('todoList/todoList') %>
+        <% if (page == 'home') { %> <% include ('home') %> <% } %> <% else
+        if(page == 'login') { %> <% include ('auth/login') %> <% } %>
       </div>
       <%- include('layouts/footer') %>
     </div>

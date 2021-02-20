@@ -8,7 +8,7 @@ function authincateUser() {}
 
 module.exports.signup = (req, res) => {
   //render signUp views
-  res.render("auth/signup");
+  res.render("auth/signup", { title: "signup" });
 };
 
 module.exports.addUser = (req, res) => {
@@ -17,9 +17,13 @@ module.exports.addUser = (req, res) => {
 };
 
 module.exports.login = (req, res) => {
-  res.render("auth/login");
+  res.render("auth/login", { title: "login" });
 };
 
 module.exports.authincateUser = (req, res) => {
-  res.send("user Signed in");
+  // res.send("user Signed in");
+  const { usermail, password } = req.body;
+  console.log(usermail);
+  console.log(password);
+  console.log(req.body);
 };
