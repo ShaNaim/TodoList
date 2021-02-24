@@ -1,12 +1,20 @@
 const { render } = require("ejs");
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+
+//Routers
 const authRoutes = require("./routes/authRoutes");
+const homeRouters = require("./routes/homeRouters");
 
 const app = express();
 // middlewares
 app.use(express.static("public"));
-app.use(express.json());
+// parse application/json
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 // view engine
 app.set("view engine", "ejs");
 
@@ -22,16 +30,5 @@ mongoose
   .catch((err) => console.log(err));
 
 //Routes
-app.get("/index", (req, res) => {
-  res.render("index", { title: "index", page: "home" });
-});
-
-app.get("/", (req, res) => {
-  res.render("home", { title: "home" });
-});
 app.use(authRoutes);
-
-// app.get("/login", (req, res) => {
-//   //res.redirect("/about");
-//   res.render("login", { title: "Login" });
-// });
+app.use(homeRouters);
