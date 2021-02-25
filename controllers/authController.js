@@ -71,3 +71,8 @@ module.exports.authincateUser = async (req, res) => {
     res.status(400).json({ errors });
   }
 };
+
+module.exports.logout = (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.redirect("/");
+};

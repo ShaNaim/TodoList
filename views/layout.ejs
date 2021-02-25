@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!------- FONT AWESOME -------->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+      crossorigin="anonymous"
+    />
+
+    <!------- BOOTSTRAP -------->
+    <link
+      rel="stylesheet"
+      href="/bower_components/bootstrap/dist/css/bootstrap.css"
+    />
+
+    <!------- Custome CSS -------->
+    <link rel="stylesheet" href="custom_components/css/todoList.css" />
+
+    <title>ToDo | <%= title %></title>
+  </head>
+  <body class="bg-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+        <a class="navbar-brand" href="/"><h4>ToDo</h4></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link <% if (title == "Home") { %> active  <% } %>" href="/" >Home</a>
+            <% if (user) { %>
+                <a class="nav-item nav-link <% if (title == "DashBoard") { %> active  <% } %>" href="/dashboard" >Welcome , <%= user.email %> </a>
+                <a class="nav-item nav-link <% if (title == "Logout") { %> active  <% } %>" href="/logout">Logout</a>
+            <% } else { %>
+              <a class="nav-item nav-link <% if (title == "About") { %> active  <% } %>" href="/about" >About</a>
+              <a class="nav-item nav-link <% if (title == "SignUp") { %> active  <% } %>" href="/signup">SignUp</a>
+              <a class="nav-item nav-link <% if (title == "Login") { %> active  <% } %>" href="/login">Login</a>
+            <% } %>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <!------------- Rendering PAGE ------------->
+          <%- body %>
+        <!---------------------------------------->
+          <footer>
+            <label for="copyRighht"> copyRight &copy; 2021 manageIT </label>
+            <script src="/bower_components/jquery/dist/jquery.js"></script>
+            <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+          </footer>
+      </div>
+  </body>
+</html>
