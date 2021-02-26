@@ -25,6 +25,7 @@
     <title>ToDo | <%= title %></title>
   </head>
   <body class="bg-secondary">
+    <!----------------------------------------------------- TOP NAVIGATION ----------------------------------------------->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
         <a class="navbar-brand" href="/"><h4>ToDo</h4></a>
         <button
@@ -38,7 +39,7 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link <% if (title == "Home") { %> active  <% } %>" href="/" >Home</a>
             <% if (user) { %>
@@ -52,12 +53,15 @@
           </div>
         </div>
       </nav>
+      <!------------------------------------------------TOP NAVIGATION END---------------------------------------------------------->
       <div class="container">
-        <!------------- Rendering PAGE ------------->
+        <!----------------------------------------------- Rendering PAGE ----------------------------------------------->
           <%- body %>
-        <!---------------------------------------->
+        <!----------------------------------------------RENDERING PAGE END------------------------------------------------------>
           <footer>
             <label for="copyRighht"> copyRight &copy; 2021 manageIT </label>
+            
+            <script src="custom_components/js/submitTodo.js"></script>
             <script src="/bower_components/jquery/dist/jquery.js"></script>
             <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
           </footer>

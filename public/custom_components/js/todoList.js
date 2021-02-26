@@ -26,6 +26,7 @@ list.addEventListener(
   function (ev) {
     if (ev.target.tagName === "LI") {
       ev.target.classList.toggle("checked");
+      ev.target.classList.remove("task");
     }
   },
   false
@@ -36,6 +37,7 @@ function newElement() {
   var li = document.createElement("li");
   var inputValue = document.getElementById("myInput").value;
   var t = document.createTextNode(inputValue);
+  li.className = "task";
   li.appendChild(t);
   if (inputValue === "") {
     alert("You must write something!");
@@ -57,7 +59,6 @@ function newElement() {
     };
   }
 }
-
 // {
 //   $(document).ready(function () {
 //     $("form").on("submit", function () {

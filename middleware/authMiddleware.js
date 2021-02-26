@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
+// Must be User
 const requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
@@ -14,6 +15,16 @@ const requireAuth = (req, res, next) => {
     });
   } else {
     res.redirect("/login");
+  }
+};
+
+// Must Be Guest
+const requireGuest = (req, res, next) => {
+  const token = req.cookies.jwt;
+  if (token) {
+    res.redirect("/dashboard");
+  } else {
+    next();
   }
 };
 
@@ -37,4 +48,4 @@ const checkUser = (req, res, next) => {
   }
 };
 
-module.exports = { requireAuth, checkUser };
+module.exports = { requireAuth, checkUser, requireGuest };
