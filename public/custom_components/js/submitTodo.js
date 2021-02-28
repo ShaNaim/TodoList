@@ -8,18 +8,24 @@ function getCookies() {
   return cookies;
 }
 var submit = () => {
-  var todoSubmit = [];
+  var newList = [];
+  var checkedList = [];
   console.log("Inside FOR");
-  var todoList = document.getElementsByClassName("task");
-  for (var i = 0, len = todoList.length; i < len; i++) {
-    todoSubmit[i] = todoList[i].innerText.replace("\u00D7", "");
+  var taskList = document.getElementsByClassName("task");
+  for (var i = 0; i < taskList.length; i++) {
+    newList[i] = taskList[i].innerText.replace("\u00D7", "");
+  }
+  var checkList = document.getElementsByClassName("checked");
+  for (var i = 0; i < checkedList.length; i++) {
+    checkedList[i] = checkList[i].innerText.replace("\u00D7", "");
+    checkedList[i] = checkedList[i].substr(0, checkedList[i].length - 2);
   }
 
   const url = "/todo";
   try {
     fetch(url, {
       method: "POST",
-      body: JSON.stringify({ list: todoSubmit }),
+      body: JSON.stringify({ list: newList, checked: checkedList }),
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },

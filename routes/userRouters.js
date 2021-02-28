@@ -6,5 +6,5 @@ const router = Router();
 
 router.get("/dashboard", requireAuth, userController.dashBoardView);
 
-router.post("/todo", requireAuth, userController.submitTodo);
+router.post("/todo", userController.submitTask);
 module.exports = router;

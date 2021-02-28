@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/Users");
 const jwt = require("jsonwebtoken");
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -41,10 +41,10 @@ module.exports.signup = (req, res) => {
 };
 
 module.exports.addUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
   try {
-    const user = await User.create({ email, password });
+    const user = await User.createUser(email, password, name);
     const token = createJWT(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user: user._id });

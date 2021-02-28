@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/Users");
 
 // Must be User
 const requireAuth = (req, res, next) => {
@@ -37,7 +37,7 @@ const checkUser = (req, res, next) => {
         res.locals.user = null;
         next();
       } else {
-        let user = await User.findById(decodedToken.id);
+        let user = await User.getUser(decodedToken.id);
         res.locals.user = user;
         next();
       }

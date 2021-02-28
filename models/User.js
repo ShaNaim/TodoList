@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const { isEmail } = require("validator");
 const bcrypt = require("bcrypt");
 
+var Task = require("./Task");
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -15,6 +17,18 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please Enter a Password"],
     minlength: [6, "Minimum Password Length 6 Characters"],
   },
+  name: {
+    type: String,
+    require: [true, "Please Enter Your Name"],
+    unique: false,
+    lowercase: false,
+    minlength: [2, "Minimum Password Length 2 Characters"],
+  },
+  tasks: {
+    type: [],
+    ref: "Task",
+    default: [],
+  },
 });
 //Hooks
 userSchema.pre("save", async function (next) {
@@ -24,18 +38,6 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.statics.login = async function (email, password) {
-  console.log(`User : ${email} ${password}`);
-  const user = await this.findOne({ email });
-  if (user) {
-    const auth = await bcrypt.compare(password, user.password);
-    if (auth) {
-      return user;
-    }
-    throw Error("Incorrect Password");
-  }
-  throw Error("incorrect Email");
-};
 const User = mongoose.model("user", userSchema);
 
 module.exports = User;
